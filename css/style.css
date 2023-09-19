@@ -4,11 +4,11 @@
   box-sizing: border-box;
 }
 html {
-  font-size: 62.5%
+  font-size: 62.5%;
 }
-body{
+body {
   font-size: 1.6rem;
-  font-family: "Roboto", sans-serif;
+  font-family: 'Roboto', sans-serif;
 }
 .main {
   padding: 5rem;
@@ -17,19 +17,23 @@ body{
   align-items: center;
   text-align: center;
 }
-.label, .playing-container, .print-result {
+.label,
+.playing-container,
+.print-result,
+.counter {
   padding: 1rem;
 }
-.select{
+.select {
   height: 3rem;
 }
-.button, .print-result {
+.button,
+.print-result {
   padding: 0.5rem;
   border-radius: 0.5rem;
   background-color: rgb(253, 143, 0);
   color: white;
 }
-.button:hover{
+.button:hover {
   transition: background-color 0.2s;
   background-color: rgb(82, 48, 4);
   cursor: pointer;

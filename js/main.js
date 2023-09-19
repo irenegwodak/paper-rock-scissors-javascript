@@ -4,12 +4,16 @@
 const inputSelect = document.querySelector('.js-select');
 const btn = document.querySelector('.js-button');
 const printElement = document.querySelector('.js-print-result');
+//counters
+const counterUser = document.querySelector('.js-counter-user');
+const counterMachine = document.querySelector('.js-counter-machine');
+let userCount = 0;
+let machineCount = 0;
 
 //Messages to print
 const youWin = '¡Has ganado!';
 const youLose = '¡Has perdido!';
 const draw = 'Empate.';
-
 
 //FUNCTIONS
 
@@ -59,14 +63,24 @@ function userVsMachine() {
   return result;
 }
 
-function print() {
-    const result = userVsMachine();
-    printElement.innerHTML = result;
+
+function printResult() {
+  const result = userVsMachine();
+  printElement.innerHTML = result;
+
+  if (result === youWin) {
+    userCount = userCount + 1;
+    counterUser.innerHTML = `Jugadora: ${userCount}`;
+  }
+  if (result === youLose) {
+    machineCount += 1;
+    counterMachine.innerHTML = `Computadora: ${machineCount}`;
+  }
 }
 
 function handleClick() {
   userVsMachine();
-  print();
+  printResult();
 }
 
 //EVENTS
