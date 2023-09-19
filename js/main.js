@@ -1,11 +1,17 @@
 'use strict';
-console.log('ikuyo! :)');
 
 // DECLARATIONS
-
 const inputSelect = document.querySelector('.js-select');
 const btn = document.querySelector('.js-button');
 const printElement = document.querySelector('.js-print-result');
+
+//Messages to print
+const youWin = '¡Has ganado!';
+const youLose = '¡Has perdido!';
+const draw = 'Empate.';
+
+
+//FUNCTIONS
 
 // GENERIC FUNCTIONS
 function getRandomNumber(max) {
@@ -13,9 +19,10 @@ function getRandomNumber(max) {
 }
 
 // SPECIFIC FUNCTIONS
-function handleClick() {
+function getMachineSelect() {
+  const randomNumber = getRandomNumber(9);
+
   /* machine: rock:0-3, paper:7+, else: scissors*/
-  const randomNumber = Math.ceil(Math.random() * 9);
   let machineSelect = '';
   if (randomNumber <= 3) {
     machineSelect = 'rock';
@@ -24,29 +31,42 @@ function handleClick() {
   } else {
     machineSelect = 'scissors';
   }
-  console.log(randomNumber);
-  console.log(machineSelect);
+  return machineSelect;
+}
 
-  /* Compares user vs machine: rock:0-3, paper:7+, else: scissors*/
+function userVsMachine() {
   const userSelect = inputSelect.value;
+  const machineSelect = getMachineSelect();
+  let result = '';
+
   //user wins
   if (userSelect === 'paper' && machineSelect === 'rock') {
-    printElement.innerHTML = '¡Has ganado!';
+    result = youWin;
+  } else if (userSelect === 'rock' && machineSelect === 'scissors') {
+    result = youWin;
+  } else if (userSelect === 'scissors' && machineSelect === 'paper') {
+    result = youWin;
   }
-  else if (userSelect === 'rock' && machineSelect === 'scissors') {
-    printElement.innerHTML = '¡Has ganado!';
-  }
-  else if (userSelect === 'scissors' && machineSelect === 'paper') {
-    printElement.innerHTML = '¡Has ganado!';
-  } 
   // draw
   else if (userSelect === machineSelect) {
-    printElement.innerHTML = 'Empate';
+    result = draw;
   }
+  // user lose
   else {
-    printElement.innerHTML = '¡Has perdido!';
+    result = youLose;
   }
-//   console.log(userSelect);
+
+  return result;
+}
+
+function print() {
+    const result = userVsMachine();
+    printElement.innerHTML = result;
+}
+
+function handleClick() {
+  userVsMachine();
+  print();
 }
 
 //EVENTS
