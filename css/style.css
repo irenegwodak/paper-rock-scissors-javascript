@@ -8,4 +8,29 @@ html {
 }
 body{
   font-size: 1.6rem;
+  font-family: "Roboto", sans-serif;
+}
+.main {
+  padding: 5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+.label, .playing-container, .print-result {
+  padding: 1rem;
+}
+.select{
+  height: 3rem;
+}
+.button, .print-result {
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  background-color: rgb(253, 143, 0);
+  color: white;
+}
+.button:hover{
+  transition: background-color 0.2s;
+  background-color: rgb(82, 48, 4);
+  cursor: pointer;
 }

@@ -3,23 +3,29 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@700&family=Roboto:wght@300;400&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="./css/style.css" />
     <title>PIEDRA PAPEL Y TIJERAS</title>
   </head>
   <body>
-    <main>
+    <main class="main">
       <h1>Juego Piedra, Papel y Tijera</h1>
-      <label for="user-move">Introduce aquí tu jugada</label>
-      <div>
-        <select name="" id="user-move" class="js-select">
-          <option value="">Seleccione su jugada</option>
+      <label for="user-move" class="label">Introduce aquí tu jugada</label>
+      <div class="playing-container">
+        <select name="" id="user-move" class="js-select select">
+          <option value="">Seleccione su jugada:</option>
           <option value="rock">Piedra</option>
           <option value="paper">Papel</option>
           <option value="scissors">Tijera</option>
         </select>
-        <button class="js-button">Jugar</button>
+        <button class="js-button button">Jugar</button>
       </div>
-      <p class="js-print-result">¡Vamos a jugar!</p>
+      <p class="js-print-result print-result">¡Vamos a jugar!</p>
       
     </main>
     <script type="text/javascript" src="./js/main.js"></script>
