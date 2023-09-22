@@ -78,7 +78,8 @@ function printResult() {
   }
 }
 
-function handleClick() {
+function handleClick(event) {
+  event.preventDefault();
   userVsMachine();
   printResult();
 }
