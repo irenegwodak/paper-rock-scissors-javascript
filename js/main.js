@@ -7,13 +7,15 @@ const printElement = document.querySelector('.js-print-result');
 //counters
 const counterUser = document.querySelector('.js-counter-user');
 const counterMachine = document.querySelector('.js-counter-machine');
+const counterGame = document.querySelector('.js-counter-game');
 let userCount = 0;
 let machineCount = 0;
+let gameCount = 0;
 
 //Messages to print
-const youWin = '¡Has ganado!';
-const youLose = '¡Has perdido!';
-const draw = 'Empate.';
+const youWin = '¡Has ganado en esta jugada!';
+const youLose = '¡Has perdido en esta jugada!';
+const draw = 'Empate';
 
 //FUNCTIONS
 
@@ -35,6 +37,8 @@ function getMachineSelect() {
   } else {
     machineSelect = 'scissors';
   }
+  console.log("número random: ", randomNumber);
+  console.log('selección máquina en función getMachineSelect: ', machineSelect);
   return machineSelect;
 }
 
@@ -44,11 +48,11 @@ function userVsMachine() {
   let result = '';
 
   //user wins
-  if (userSelect === 'paper' && machineSelect === 'rock') {
-    result = youWin;
-  } else if (userSelect === 'rock' && machineSelect === 'scissors') {
-    result = youWin;
-  } else if (userSelect === 'scissors' && machineSelect === 'paper') {
+  if (
+    (userSelect === 'paper' && machineSelect === 'rock') ||
+    (userSelect === 'rock' && machineSelect === 'scissors') ||
+    (userSelect === 'scissors' && machineSelect === 'paper')
+  ) {
     result = youWin;
   }
   // draw
@@ -59,29 +63,34 @@ function userVsMachine() {
   else {
     result = youLose;
   }
-
+  console.log('resultado de función userVsmachine: ', result);
   return result;
 }
 
-
-function printResult() {
-  const result = userVsMachine();
+function printMsgResult(userVsMachineResult) {
+  const result = userVsMachineResult;
   printElement.innerHTML = result;
-
-  if (result === youWin) {
+}
+function updateCounters(userVsMachineResult) {
+  if (userVsMachineResult === youWin) {
     userCount = userCount + 1;
-    counterUser.innerHTML = `Jugadora: ${userCount}`;
+    counterUser.innerHTML = userCount;
   }
-  if (result === youLose) {
+  if (userVsMachineResult === youLose) {
     machineCount += 1;
-    counterMachine.innerHTML = `Computadora: ${machineCount}`;
+    counterMachine.innerHTML = machineCount;
   }
+  counterGame.innerHTML = gameCount += 1;
 }
 
 function handleClick(event) {
   event.preventDefault();
-  userVsMachine();
-  printResult();
+  const result = userVsMachine();
+  printMsgResult(result);
+  updateCounters(result);
+
+  console.log('constante result: ', result);
+  console.log('jugadas: ', gameCount);
 }
 
 //EVENTS

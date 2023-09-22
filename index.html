@@ -15,21 +15,21 @@
   <body>
     <main class="main">
       <h1>Juego Piedra, Papel y Tijera</h1>
-      <label for="user-move" class="label">Introduce aquí tu jugada:</label>
+      <label for="user-move" class="label">Tienes 10 oportunidades, escoge sabiamente:</label>
       <form action="" class="playing-container">
-          <select name="" id="user-move" class="js-select select">
-            <option value="empty">Seleccione su jugada</option>
-            <option value="rock">Piedra</option>
-            <option value="paper">Papel</option>
-            <option value="scissors">Tijera</option>
-          </select>
-          <button class="js-button button">Jugar</button>
+        <select name="" id="user-move" class="js-select select">
+          <option value="empty">Seleccione su jugada</option>
+          <option value="rock">Piedra</option>
+          <option value="paper">Papel</option>
+          <option value="scissors">Tijera</option>
+        </select>
+        <button class="js-button button">Jugar</button>
       </form>
       <p class="js-print-result print-result">¡Vamos a jugar!</p>
 
-      <p class="js-counter-user counter">Jugadora: 0</p>
-      <p class="js-counter-machine counter">Computadora: 0</p>
-      
+      <p class="counter">Jugadora: <span class="js-counter-user">0</span></p>
+      <p class="counter">Computadora: <span class="js-counter-machine">0</span></p>
+      <p class="counter">Partidas jugadas: <span class="js-counter-game">0</span></p>
     </main>
     <script type="text/javascript" src="./js/main.js"></script>
   </body>
