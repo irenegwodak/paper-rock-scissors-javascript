@@ -6,11 +6,12 @@ const btnPlay = getElement('.js-play-button');
 const endGameHtmlBlock = getElement('.js-endgame-container');
 const btnReset = getElement('.js-reset-button');
 
-//printers
+//PRINTERS
 const printElement = getElement('.js-print');
 const printEndGame = getElement('.js-endgame');
+const totalAttemptsPerGame = getElement('.js-attempts');
 
-//counters
+//COUNTERS
 const counterUser = getElement('.js-counter-user');
 const counterMachine = getElement('.js-counter-machine');
 const counterGame = getElement('.js-counter-game');
@@ -19,23 +20,33 @@ let userCount = 0;
 let machineCount = 0;
 let gameCount = 0;
 
-//Messages to print
+//MESSAGES TO PRINT
+//Default
 const defaultMsg = '¡Vamos a jugar!';
+const defaultAttemptsPerGame = 10;
+trackElement(printElement, defaultMsg);
+trackElement(totalAttemptsPerGame, defaultAttemptsPerGame);
+
+const warning = '¡Escoge piedra, papel o tijera!';
+
+//Messages during the game
 const youWin = '¡Has ganado la jugada!';
 const youLose = '¡Has perdido la jugada!';
 const draw = 'Empate';
-const warning = '¡Escoge piedra, papel o tijera!';
+//Messages at the end of game
 const msgEndGameWin = 'Has ganado la partida';
 const msgEndGameDraw = 'Empate de la partida';
 const msgEndGameLose = 'Has perdido la partida';
 
-trackElement(printElement, defaultMsg);
 
 //FUNCTIONS
+
 // HTML ELEMENT FUNCIONTS
+//To make easier call html elements
 function getElement(element) {
   return document.querySelector(element);
 }
+//To make easier print innnerHTML elements
 function trackElement(element, msg) {
   return (element.innerHTML = msg);
 }
@@ -44,6 +55,7 @@ function trackElement(element, msg) {
 function getRandomNumber(max) {
   return Math.ceil(Math.random() * max);
 }
+//Prints on html on the principal advices
 function printMsg(msg) {
   trackElement(printElement, msg);
 }
@@ -54,6 +66,7 @@ function updateCounters() {
   trackElement(counterMachine, machineCount);
   trackElement(counterGame, gameCount);
 }
+//Check and update the counters if iser win, lose or draw
 function checkCounters(msg) {
   gameCount += 1;
   if (msg !== warning) {
@@ -68,10 +81,11 @@ function checkCounters(msg) {
   }
 }
 
+//Get random machine option
 function getMachineSelect() {
   const randomNumber = getRandomNumber(9);
 
-  /* machine: rock:0-3, paper:7+, else: scissors*/
+  /* Machine: rock:0-3, paper:7+, else: scissors*/
   let machineSelect = '';
   if (randomNumber <= 3) {
     machineSelect = 'rock';
@@ -83,12 +97,10 @@ function getMachineSelect() {
   return machineSelect;
 }
 
-// function checkIfUserOption
-
 function userVsMachine(userValue) {
   let msg = '';
   const machineSelect = getMachineSelect();
-  //user wins
+  //User wins
   if (
     (userValue === 'paper' && machineSelect === 'rock') ||
     (userValue === 'rock' && machineSelect === 'scissors') ||
@@ -96,11 +108,11 @@ function userVsMachine(userValue) {
   ) {
     msg = youWin;
   }
-  //draw
+  //Draw
   else if (userValue === machineSelect) {
     msg = draw;
   }
-  //user lose
+  //User lose
   else {
     msg = youLose;
   }
@@ -108,7 +120,7 @@ function userVsMachine(userValue) {
   checkCounters(msg);
 }
 function playGame() {
-  //check if user selected an option
+  //Check if user selected an option
   const userSelect = inputSelect.value;
   if (userSelect === 'default') {
     printMsg(warning);
@@ -116,8 +128,9 @@ function playGame() {
     userVsMachine(userSelect);
   }
 }
+//Check if user reached the attempts
 function endGame() {
-  if (gameCount >= 10) {
+  if (gameCount >= defaultAttemptsPerGame) {
     btnPlay.classList.add('hidden');
     endGameHtmlBlock.classList.remove('hidden');
     if (userCount > machineCount) {
@@ -130,8 +143,6 @@ function endGame() {
   }
 }
 
-
-
 function resetCounters() {
   userCount = 0;
   machineCount = 0;
@@ -139,12 +150,15 @@ function resetCounters() {
   updateCounters();
 }
 
-// HandleClick Functions
+// HANDLECLICK FUNCTIONS
+
+//Start the game
 function handleClickPlay(event) {
   event.preventDefault();
   playGame();
   endGame();
 }
+//Reset game
 function handleClickReset(event) {
   event.preventDefault();
 
