@@ -14,22 +14,30 @@
   </head>
   <body>
     <main class="main">
-      <h1>Juego Piedra, Papel y Tijera</h1>
+      <h1>Juega a Piedra, Papel y Tijera</h1>
       <label for="user-move" class="label">Tienes 10 oportunidades, escoge sabiamente:</label>
       <form action="" class="playing-container">
         <select name="" id="user-move" class="js-select select">
-          <option value="empty">Seleccione su jugada</option>
+          <option value="default">Selecciona tu jugada</option>
           <option value="rock">Piedra</option>
           <option value="paper">Papel</option>
           <option value="scissors">Tijera</option>
         </select>
-        <button class="js-button button">Jugar</button>
+        <button class="js-play-button button">Jugar</button>
       </form>
-      <p class="js-print-result print-result">¡Vamos a jugar!</p>
-
-      <p class="counter">Jugadora: <span class="js-counter-user">0</span></p>
-      <p class="counter">Computadora: <span class="js-counter-machine">0</span></p>
-      <p class="counter">Partidas jugadas: <span class="js-counter-game">0</span></p>
+      <p class="js-print print"></p>
+      
+      <div class="counters-container">
+        <div class="players-counter-container">
+          <p class="counter player">Jugadora: <span class="js-counter-user">0</span></p>
+          <p class="counter player">Computadora: <span class="js-counter-machine">0</span></p>
+        </div>
+        <p class="counter">Partidas jugadas: <span class="js-counter-game">0</span></p>
+      </div>
+      <div class="js-endgame-container hidden">
+        <p class="js-endgame print"></p>
+        <button class="js-reset-button button">Jugar otra partida</button>
+      </div>
     </main>
     <script type="text/javascript" src="./js/main.js"></script>
   </body>

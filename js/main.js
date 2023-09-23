@@ -2,8 +2,14 @@
 
 // DECLARATIONS
 const inputSelect = document.querySelector('.js-select');
-const btn = document.querySelector('.js-button');
-const printElement = document.querySelector('.js-print-result');
+const btnPlay = document.querySelector('.js-play-button');
+const endGameHtmlBlock = document.querySelector('.js-endgame-container');
+const btnReset = document.querySelector('.js-reset-button');
+
+//printers
+const printElement = document.querySelector('.js-print');
+const printEndGame = document.querySelector('.js-endgame');
+
 //counters
 const counterUser = document.querySelector('.js-counter-user');
 const counterMachine = document.querySelector('.js-counter-machine');
@@ -13,9 +19,13 @@ let machineCount = 0;
 let gameCount = 0;
 
 //Messages to print
-const youWin = '¡Has ganado en esta jugada!';
-const youLose = '¡Has perdido en esta jugada!';
+const defaultMsg = '¡Vamos a jugar!';
+const youWin = '¡Has ganado la jugada!';
+const youLose = '¡Has perdido la jugada!';
 const draw = 'Empate';
+const warning = '¡Escoge piedra, papel o tijera!';
+
+printElement.innerHTML = defaultMsg;
 
 //FUNCTIONS
 
@@ -23,8 +33,30 @@ const draw = 'Empate';
 function getRandomNumber(max) {
   return Math.ceil(Math.random() * max);
 }
+function printMsg(msg) {
+  printElement.innerHTML = msg;
+}
 
 // SPECIFIC FUNCTIONS
+function updateCounters() {
+  counterUser.innerHTML = userCount;
+  counterMachine.innerHTML = machineCount;
+  counterGame.innerHTML = gameCount;
+}
+function checkCounters(msg) {
+  gameCount += 1;
+  if (msg !== warning) {
+    if (msg === youWin) {
+      userCount = userCount + 1;
+      updateCounters();
+    }
+    if (msg === youLose) {
+      machineCount += 1;
+      updateCounters();
+    } else updateCounters();
+  }
+}
+
 function getMachineSelect() {
   const randomNumber = getRandomNumber(9);
 
@@ -37,61 +69,83 @@ function getMachineSelect() {
   } else {
     machineSelect = 'scissors';
   }
-  console.log("número random: ", randomNumber);
-  console.log('selección máquina en función getMachineSelect: ', machineSelect);
+  console.log('número random: ', randomNumber);
+  console.log('selección máquina: ', machineSelect);
   return machineSelect;
 }
 
-function userVsMachine() {
-  const userSelect = inputSelect.value;
-  const machineSelect = getMachineSelect();
-  let result = '';
+// function checkIfUserOption
 
+function userVsMachine(userValue) {
+  let msg = '';
+  const machineSelect = getMachineSelect();
   //user wins
   if (
-    (userSelect === 'paper' && machineSelect === 'rock') ||
-    (userSelect === 'rock' && machineSelect === 'scissors') ||
-    (userSelect === 'scissors' && machineSelect === 'paper')
+    (userValue === 'paper' && machineSelect === 'rock') ||
+    (userValue === 'rock' && machineSelect === 'scissors') ||
+    (userValue === 'scissors' && machineSelect === 'paper')
   ) {
-    result = youWin;
+    msg = youWin;
   }
   // draw
-  else if (userSelect === machineSelect) {
-    result = draw;
+  else if (userValue === machineSelect) {
+    msg = draw;
   }
   // user lose
   else {
-    result = youLose;
+    msg = youLose;
   }
-  console.log('resultado de función userVsmachine: ', result);
-  return result;
+  printMsg(msg);
+  checkCounters(msg);
+  console.log('userVsmachine: ', msg);
+}
+function playGame() {
+  //check if user selected an option
+  const userSelect = inputSelect.value;
+  if (userSelect === 'default') {
+    printMsg(warning);
+  } else {
+    userVsMachine(userSelect);
+  }
+}
+function endGame() {
+  if (gameCount >= 10) {
+    btnPlay.classList.add('hidden');
+    endGameHtmlBlock.classList.remove('hidden');
+    if (userCount > machineCount) {
+      printEndGame.innerHTML = 'Has ganado la partida';
+    } else if (userCount === machineCount) {
+      printEndGame.innerHTML = 'Empate de la partida';
+    } else {
+      printEndGame.innerHTML = 'Has perdido la partida';
+    }
+  }
+}
+function resetCounters() {
+  userCount = 0;
+  machineCount = 0;
+  gameCount = 0;
+  updateCounters();
 }
 
-function printMsgResult(userVsMachineResult) {
-  const result = userVsMachineResult;
-  printElement.innerHTML = result;
-}
-function updateCounters(userVsMachineResult) {
-  if (userVsMachineResult === youWin) {
-    userCount = userCount + 1;
-    counterUser.innerHTML = userCount;
-  }
-  if (userVsMachineResult === youLose) {
-    machineCount += 1;
-    counterMachine.innerHTML = machineCount;
-  }
-  counterGame.innerHTML = gameCount += 1;
-}
-
-function handleClick(event) {
+// HandleClick Functions
+function handleClickPlay(event) {
   event.preventDefault();
-  const result = userVsMachine();
-  printMsgResult(result);
-  updateCounters(result);
+  playGame();
+  endGame();
+  console.log('gamecount: ', gameCount);
+}
+function handleClickReset(event) {
+  event.preventDefault();
 
-  console.log('constante result: ', result);
-  console.log('jugadas: ', gameCount);
+  inputSelect.value = 'default';
+  resetCounters();
+  printElement.innerHTML = defaultMsg;
+  btnPlay.classList.remove('hidden');
+  printEndGame.innerHTML = '';
+  endGameHtmlBlock.classList.add('hidden');
 }
 
 //EVENTS
-btn.addEventListener('click', handleClick);
+btnPlay.addEventListener('click', handleClickPlay);
+btnReset.addEventListener('click', handleClickReset);
