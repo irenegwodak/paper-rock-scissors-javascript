@@ -1,19 +1,20 @@
 'use strict';
 
 // DECLARATIONS
-const inputSelect = document.querySelector('.js-select');
-const btnPlay = document.querySelector('.js-play-button');
-const endGameHtmlBlock = document.querySelector('.js-endgame-container');
-const btnReset = document.querySelector('.js-reset-button');
+const inputSelect = getElement('.js-select');
+const btnPlay = getElement('.js-play-button');
+const endGameHtmlBlock = getElement('.js-endgame-container');
+const btnReset = getElement('.js-reset-button');
 
 //printers
-const printElement = document.querySelector('.js-print');
-const printEndGame = document.querySelector('.js-endgame');
+const printElement = getElement('.js-print');
+const printEndGame = getElement('.js-endgame');
 
 //counters
-const counterUser = document.querySelector('.js-counter-user');
-const counterMachine = document.querySelector('.js-counter-machine');
-const counterGame = document.querySelector('.js-counter-game');
+const counterUser = getElement('.js-counter-user');
+const counterMachine = getElement('.js-counter-machine');
+const counterGame = getElement('.js-counter-game');
+
 let userCount = 0;
 let machineCount = 0;
 let gameCount = 0;
@@ -24,24 +25,34 @@ const youWin = '¡Has ganado la jugada!';
 const youLose = '¡Has perdido la jugada!';
 const draw = 'Empate';
 const warning = '¡Escoge piedra, papel o tijera!';
+const msgEndGameWin = 'Has ganado la partida';
+const msgEndGameDraw = 'Empate de la partida';
+const msgEndGameLose = 'Has perdido la partida';
 
-printElement.innerHTML = defaultMsg;
+trackElement(printElement, defaultMsg);
 
 //FUNCTIONS
+// HTML ELEMENT FUNCIONTS
+function getElement(element) {
+  return document.querySelector(element);
+}
+function trackElement(element, msg) {
+  return (element.innerHTML = msg);
+}
 
 // GENERIC FUNCTIONS
 function getRandomNumber(max) {
   return Math.ceil(Math.random() * max);
 }
 function printMsg(msg) {
-  printElement.innerHTML = msg;
+  trackElement(printElement, msg);
 }
 
 // SPECIFIC FUNCTIONS
 function updateCounters() {
-  counterUser.innerHTML = userCount;
-  counterMachine.innerHTML = machineCount;
-  counterGame.innerHTML = gameCount;
+  trackElement(counterUser, userCount);
+  trackElement(counterMachine, machineCount);
+  trackElement(counterGame, gameCount);
 }
 function checkCounters(msg) {
   gameCount += 1;
@@ -69,8 +80,6 @@ function getMachineSelect() {
   } else {
     machineSelect = 'scissors';
   }
-  console.log('número random: ', randomNumber);
-  console.log('selección máquina: ', machineSelect);
   return machineSelect;
 }
 
@@ -87,17 +96,16 @@ function userVsMachine(userValue) {
   ) {
     msg = youWin;
   }
-  // draw
+  //draw
   else if (userValue === machineSelect) {
     msg = draw;
   }
-  // user lose
+  //user lose
   else {
     msg = youLose;
   }
   printMsg(msg);
   checkCounters(msg);
-  console.log('userVsmachine: ', msg);
 }
 function playGame() {
   //check if user selected an option
@@ -113,14 +121,17 @@ function endGame() {
     btnPlay.classList.add('hidden');
     endGameHtmlBlock.classList.remove('hidden');
     if (userCount > machineCount) {
-      printEndGame.innerHTML = 'Has ganado la partida';
+      trackElement(printEndGame, msgEndGameWin);
     } else if (userCount === machineCount) {
-      printEndGame.innerHTML = 'Empate de la partida';
+      trackElement(printEndGame, msgEndGameDraw);
     } else {
-      printEndGame.innerHTML = 'Has perdido la partida';
+      trackElement(printEndGame, msgEndGameLose);
     }
   }
 }
+
+
+
 function resetCounters() {
   userCount = 0;
   machineCount = 0;
@@ -133,16 +144,15 @@ function handleClickPlay(event) {
   event.preventDefault();
   playGame();
   endGame();
-  console.log('gamecount: ', gameCount);
 }
 function handleClickReset(event) {
   event.preventDefault();
 
   inputSelect.value = 'default';
   resetCounters();
-  printElement.innerHTML = defaultMsg;
+  trackElement(printElement, defaultMsg);
   btnPlay.classList.remove('hidden');
-  printEndGame.innerHTML = '';
+  trackElement(printEndGame, '');
   endGameHtmlBlock.classList.add('hidden');
 }
 
