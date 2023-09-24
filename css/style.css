@@ -19,30 +19,35 @@ body {
   justify-content: center;
   align-items: center;
   text-align: center;
+  gap: 2rem;
 }
-.label,
-.playing-container,
-.print,
+.emojis {
+  font-size: 3rem;
+}
+.rock {
+  font-size: 2.5rem;
+}
+
 .counter,
 .players-counter-container {
   padding: 1rem;
 }
 .select {
   height: 3rem;
+  text-align: center;
+  font-size: 1.8rem;
 }
 .print {
-  margin: 1rem;
-  border-radius: 0.5rem;
-  background-color: rgb(253, 143, 0) ;
-  color: hsl(0, 0%, 20%);
-  font-size: 1.5rem;
+  font-size: 1.8rem;
 }
 .button {
-  border: 0.1rem rgb(253, 143, 0) solid;
+  margin: 2rem;
+  border: 0.1rem #fd8f00 solid;
   border-radius: 0.5rem;
   padding: 0.7rem;
   background-color: white;
-  color:black;
+  color: black;
+  font-size: 2rem;
 }
 .button:hover {
   transition: background-color 0.2s;
@@ -50,8 +55,14 @@ body {
   color: white;
   cursor: pointer;
 }
+.play-button {
+  border: 0.1rem rgb(129, 90, 39) solid;
+  border-radius: 0.5rem;
+  padding: 0.7rem;
+  color: black;
+}
 .counters-container {
-  margin: 2rem;
+  margin: 1rem;
   border: 0.2rem rgb(253, 143, 0) solid;
   border-radius: 0.5rem;
 }
@@ -61,4 +72,7 @@ body {
 
 .hidden {
   display: none;
+}
+.red {
+  color: red;
 }

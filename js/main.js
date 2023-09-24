@@ -22,7 +22,7 @@ let gameCount = 0;
 
 //MESSAGES TO PRINT
 //Default
-const defaultMsg = '¡Vamos a jugar!';
+const defaultMsg = 'Dale a <span class="play-button"> Jugar</span> para empezar';
 const defaultAttemptsPerGame = 10;
 trackElement(printElement, defaultMsg);
 trackElement(totalAttemptsPerGame, defaultAttemptsPerGame);
@@ -30,13 +30,13 @@ trackElement(totalAttemptsPerGame, defaultAttemptsPerGame);
 const warning = '¡Escoge piedra, papel o tijera!';
 
 //Messages during the game
-const youWin = '¡Has ganado la jugada!';
-const youLose = '¡Has perdido la jugada!';
-const draw = 'Empate';
+const youWin = 'Has ganado esta jugada &#128588;';
+const youLose = 'Has perdido esta jugada &#128581;';
+const draw = 'Empate &#128566;';
 //Messages at the end of game
-const msgEndGameWin = 'Has ganado la partida';
-const msgEndGameDraw = 'Empate de la partida';
-const msgEndGameLose = 'Has perdido la partida';
+const msgEndGameWin = '¡Has ganado la partida! &#127881;';
+const msgEndGameDraw = 'Menuda partida, ¡habéis empatado!&#129784;&#129783;';
+const msgEndGameLose = 'Has perdido la partida &#129394;';
 
 
 //FUNCTIONS
@@ -124,8 +124,11 @@ function playGame() {
   const userSelect = inputSelect.value;
   if (userSelect === 'default') {
     printMsg(warning);
+    printElement.classList.add("red");
+
   } else {
     userVsMachine(userSelect);
+    printElement.classList.remove("red");
   }
 }
 //Check if user reached the attempts
