@@ -13,31 +13,62 @@
     <title>PIEDRA PAPEL Y TIJERAS</title>
   </head>
   <body>
-    <main class="main">
+    <header class="header">
       <h1>Jan Ken Pon</h1>
-      <p class="emojis"><span class="rock">&#9994;</span> &#128400;&#65039; &#9996;&#65039;</p>
-      <label for="user-move" class="label">Tienes <span class="js-attempts"></span> oportunidades, escoge sabiamente:</label>
-      <form action="" class="playing-container">
-        <select name="" id="user-move" class="js-select select">
-          <option value="default">Selecciona tu jugada</option>
-          <option value="rock">Piedra &#9994;</option>
-          <option value="paper">Papel &#128400;&#65039;</option>
-          <option value="scissors">Tijera &#9996;&#65039;</option>
-        </select>
-        <button class="js-play-button button">Jugar</button>
-      </form>
-      <p class="js-print print"></p>
-      
-      <div class="counters-container">
-        <div class="players-counter-container">
-          <p class="counter player">Jugadora: <span class="js-counter-user">0</span></p>
-          <p class="counter player">Máquina: <span class="js-counter-machine">0</span></p>
+      <p class="emojis">
+        <span class="rock">&#9994;</span> &#128400;&#65039; &#9996;&#65039;
+      </p>
+    </header>
+    <main class="main">
+      <p>
+        Tienes <span class="js-attempts"></span> oportunidades, escoge
+        sabiamente:
+      </p>
+      <div class="game-container">
+        <div class="playing-container">
+          <form action="">
+            <select name="" id="user-move" class="js-select select">
+              <option value="default">Selecciona tu jugada</option>
+              <option value="rock">Piedra &#9994;</option>
+              <option value="paper">Papel &#128400;&#65039;</option>
+              <option value="scissors">Tijera &#9996;&#65039;</option>
+            </select>
+            <button class="js-play-button button">Jugar</button>
+          </form>
+          <div class="js-main-printer-container">
+            <p class="js-print-machine-option print hidden"></p>
+            <p class="js-print print"></p>
+          </div>
+
+          <div class="js-endgame-container border-containers hidden">
+            <div>
+              <p class="js-endgame print"></p>
+              <img src="" alt="" class="endgame-img js-engdame-img" />
+            </div>
+            <button class="js-reset-button button reset-button">
+              Jugar otra partida
+            </button>
+          </div>
         </div>
-        <p class="counter">Partidas jugadas: <span class="js-counter-game">0</span></p>
-      </div>
-      <div class="js-endgame-container hidden">
-        <p class="js-endgame print"></p>
-        <button class="js-reset-button button">Jugar otra partida</button>
+        <div class="results-container">
+          <div class="border-containers">
+            <div class="players-counter-container">
+              <p class="player">
+                Jugadora: <span class="js-counter-user">0</span>
+              </p>
+              <p class="player">
+                Máquina: <span class="js-counter-machine">0</span>
+              </p>
+            </div>
+            <p>Empates: <span class="js-draws">0</span></p>
+          </div>
+          <p>Partidas jugadas: <span class="js-counter-game">0</span></p>
+          <div class="border-containers results-container">
+            <h3>Resultados</h3>
+            <p>Jugadora VS Máquina</p>
+            <ul class="played-games-container__list js-played-games-list"></ul>
+          </div>
+        </div>
       </div>
     </main>
     <script type="text/javascript" src="./js/main.js"></script>

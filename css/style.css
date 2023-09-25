@@ -6,42 +6,29 @@
 html {
   font-size: 62.5%;
 }
-
 body {
   font-size: 1.6rem;
   font-family: 'Roboto', sans-serif;
 }
-.main {
-  height: 100vh;
-  padding: 5rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+.header {
+  padding: 5vw;
   text-align: center;
-  gap: 2rem;
 }
-.emojis {
-  font-size: 3rem;
-}
-.rock {
-  font-size: 2.5rem;
+.main {
+  text-align: center;
 }
 
-.counter,
-.players-counter-container {
-  padding: 1rem;
+/* PLAYING WITH JS */
+.hidden {
+  display: none;
 }
-.select {
-  height: 3rem;
-  text-align: center;
-  font-size: 1.8rem;
+.red-warning {
+  color: red;
 }
-.print {
-  font-size: 1.8rem;
-}
+
+/* BUTTONS AND PRINTERS */
 .button {
-  margin: 2rem;
+  margin: 1rem;
   border: 0.1rem #fd8f00 solid;
   border-radius: 0.5rem;
   padding: 0.7rem;
@@ -55,24 +42,96 @@ body {
   color: white;
   cursor: pointer;
 }
+.print {
+  padding: 0.5rem;
+  font-size: 1.8rem;
+}
 .play-button {
   border: 0.1rem rgb(129, 90, 39) solid;
   border-radius: 0.5rem;
   padding: 0.7rem;
   color: black;
 }
-.counters-container {
+/* HEADER */
+.emojis {
+  font-size: 3rem;
+}
+.rock {
+  font-size: 2.5rem;
+}
+
+/**** CONTAINERS ****/
+.border-containers {
+  padding: 2rem;
   margin: 1rem;
   border: 0.2rem rgb(253, 143, 0) solid;
   border-radius: 0.5rem;
 }
-.player {
-  display: inline;
+/*** MAIN CONTAINER ***/
+.game-container {
+  margin: 0 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.hidden {
-  display: none;
+.select {
+  height: 3rem;
+  text-align: center;
+  font-size: 1.8rem;
 }
-.red {
-  color: red;
+
+/*** TWO PRINCIPAL CONTAINER ***/
+.playing-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 2rem;
+}
+.results-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/**** RESULTS CONTAINERS ****/
+
+/** COUNTERS CONTAINER **/
+.players-counter-container {
+  display: flex;
+}
+.player {
+  display: inline;
+  padding: 0.5rem;
+}
+/** PLAYED GAMES CONTAINER **/
+.results-container{
+  min-width: fit-content;
+}
+.played-games-container__list {
+  padding: 1rem;
+  list-style: none;
+  text-align: center;
+}
+
+/* ENDGAME CONTAINER */
+
+.endgame-img {
+  padding: 2rem;
+  max-width: 70%;
+}
+
+@media (width >= 768px) {
+  .game-container {
+    margin: 2rem;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 5rem;
+  }
+  .playing-container {
+    display: block;
+    text-align: center;
+  }
 }
